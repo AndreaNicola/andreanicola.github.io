@@ -27,13 +27,15 @@ $ go get -u github.com/swaggo/gin-swagger github.com/swaggo/files
 // @BasePath /
 ```
 
-## Annotare DTO e handler. Esempio in dto/users_dto.go:
+## Annotare DTO e handler. 
+
+Esempio di dto:
 
 ```go   
 // CreateUserDto rappresenta la richiesta di creazione utente
 type CreateUserDto struct {
-Username string `json:"username" example:"mario"`
-Email string `json:"email" example:"mario@esempio.com"`
+    Username string `json:"username" example:"mario"`
+    Email string `json:"email" example:"mario@esempio.com"`
 }
 ```
 
@@ -59,9 +61,9 @@ swag init -g ./cmd/main.go # (modificare il path a maing.go se necessario).
 
 ```go
 import (
-_ "<my-project-module>/docs"
-ginSwagger "github.com/swaggo/gin-swagger"
-swaggerFiles "github.com/swaggo/files"
+    _ "<my-project-module>/docs"
+    ginSwagger "github.com/swaggo/gin-swagger"
+    swaggerFiles "github.com/swaggo/files"
 )
 
 ```
