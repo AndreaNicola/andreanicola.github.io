@@ -77,12 +77,6 @@ git commit --amend --author="New Name <new.email@example.com>" --no-edit
 
 Questo comando modifica direttamente l'ultimo commit senza aprire l'editor, mantenendo il messaggio di commit originale. È utile quando ti accorgi subito dell'errore nell'autore dopo aver fatto un commit.
 
-### Esempio:
-
-```bash
-git commit --amend --author="Andrea Nicola <andrea@example.com>" --no-edit
-```
-
 Se il commit è già stato pushato sul server remoto, ricordati di usare `git push --force-with-lease` per aggiornare il repository remoto.
 
 Buona fortuna con la correzione dei tuoi commit! 🚀
