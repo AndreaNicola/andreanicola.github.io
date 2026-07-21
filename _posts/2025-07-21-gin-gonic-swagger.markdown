@@ -9,7 +9,7 @@ Guida rapida per integrare Swagger (swaggo) in un'app Go con gin-gonic
 
 <!--more-->
 
-# Integrare Swagger (swaggo) in un'app Go con gin-gonic — riferimento: dto/users_dto.go
+# Integrare Swagger (swaggo) in un'app Go con gin-gonic
 
 ## Dipendenze:
 
