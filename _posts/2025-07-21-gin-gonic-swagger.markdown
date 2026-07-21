@@ -11,14 +11,16 @@ Guida rapida per integrare Swagger (swaggo) in un'app Go con gin-gonic
 
 # Integrare Swagger (swaggo) in un'app Go con gin-gonic
 
-## Dipendenze:
+## Dipendenze
 
 ```bash
 $ go install github.com/swaggo/swag/cmd/swag@latest
 $ go get -u github.com/swaggo/gin-swagger github.com/swaggo/files
 ```
 
-## Documentazione di base (in main.go, sopra package main):
+## Documentazione di base
+
+in main.go, sopra package main
 
 ```go
 // @title My API
@@ -27,7 +29,7 @@ $ go get -u github.com/swaggo/gin-swagger github.com/swaggo/files
 // @BasePath /
 ```
 
-## Annotare DTO e handler. 
+## Annotare DTO e handler
 
 Esempio di dto:
 
@@ -51,13 +53,13 @@ E nell'handler:
 // @Router /users [post]
 ```
 
-## Generare i file openapi:
+## Generare i file openapi
 
 ```bash
 swag init -g ./cmd/main.go # (modificare il path a maing.go se necessario).
 ``` 
 
-## Montare Swagger UI:
+## Montare Swagger UI
 
 ```go
 import (
@@ -68,7 +70,7 @@ import (
 
 ```
 
-## Aggiungere il middleware:
+## Aggiungere il middleware
 
 ```go
    r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
