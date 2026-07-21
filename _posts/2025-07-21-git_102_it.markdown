@@ -1,0 +1,70 @@
+---
+layout: post
+title: "Correggere gli Autori dei Commit Git"
+date: 2025-07-21 10:30:00 +0200
+excerpt_separator: <!--more-->
+---
+
+A volte è necessario correggere l'autore di uno o più commit nel repository git, ad esempio quando i commit sono stati eseguiti con il nome o l'email sbagliati. Ecco come farlo dalla radice del repository.
+
+<!--more-->
+
+## Il Comando
+
+Per correggere gli autori di **tutti i commit dalla radice** del repository, utilizza il seguente comando:
+
+```bash
+git rebase -i --root --exec "git commit --amend --no-edit --author='New Name <new.email@example.com>'"
+```
+
+## Spiegazione del Comando
+
+- `git rebase -i --root`: Avvia una rebase interattiva a partire dal primo commit del repository
+- `--exec`: Esegue il comando specificato dopo ogni commit durante la rebase
+- `git commit --amend`: Modifica il commit attuale
+- `--no-edit`: Non apre l'editor per modificare il messaggio del commit
+- `--author='New Name <new.email@example.com>'`: Specifica il nuovo autore nel formato "Nome Cognome <email@example.com>"
+
+## Esempio Pratico
+
+Se vuoi correggere tutti i commit con l'autore "Andrea Nicola":
+
+```bash
+git rebase -i --root --exec "git commit --amend --no-edit --author='Andrea Nicola <andrea@example.com>'"
+```
+
+## Correttore Selettivo (Solo Alcuni Commit)
+
+Se vuoi correggere solo i commit di un determinato autore, puoi usare questo approccio più complesso:
+
+```bash
+git rebase -i --root --exec "
+  if [[ $(git log -1 --format='%an') == 'Old Name' ]]; then
+    git commit --amend --no-edit --author='New Name <new.email@example.com>'
+  fi
+"
+```
+
+## Attenzione Importante ⚠️
+
+1. **Backup**: Prima di eseguire questa operazione, crea un backup del tuo repository
+2. **Repository Pubblici**: Se il repository è stato pushato su un server remoto, dovrai usare `git push --force` per aggiornare il repository remoto. Comunica ai collaboratori prima di farlo
+3. **Commit SHA**: Questa operazione cambierà i SHA di tutti i commit, invalidando qualsiasi riferimento a specifici commit SHA
+
+## Ricaricare i Commit sul Server Remoto
+
+Dopo aver completato la rebase, se il repository è stato pushato:
+
+```bash
+git push origin --force-with-lease
+```
+
+Nota: `--force-with-lease` è più sicuro di `--force` poiché verifica che nessuno abbia pushato nuovi commit nel frattempo.
+
+## Risorse Aggiuntive
+
+- [Git Official Documentation - Rebase](https://git-scm.com/docs/git-rebase): Documentazione ufficiale di git rebase
+- [GitHub Help - Changing Author Info](https://docs.github.com/en/github/using-git/changing-author-info): Guida ufficiale di GitHub su come cambiare le informazioni dell'autore
+- [Atlassian - Git Rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase): Tutorial dettagliato su git rebase
+
+Buona fortuna con la correzione dei tuoi commit! 🚀
