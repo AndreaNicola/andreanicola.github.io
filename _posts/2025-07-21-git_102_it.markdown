@@ -33,18 +33,6 @@ Se vuoi correggere tutti i commit con l'autore "Andrea Nicola":
 git rebase -i --root --exec "git commit --amend --no-edit --author='Andrea Nicola <andrea@example.com>'"
 ```
 
-## Correttore Selettivo (Solo Alcuni Commit)
-
-Se vuoi correggere solo i commit di un determinato autore, puoi usare questo approccio più complesso:
-
-```bash
-git rebase -i --root --exec "
-  if [[ $(git log -1 --format='%an') == 'Old Name' ]]; then
-    git commit --amend --no-edit --author='New Name <new.email@example.com>'
-  fi
-"
-```
-
 ## Attenzione Importante ⚠️
 
 1. **Backup**: Prima di eseguire questa operazione, crea un backup del tuo repository
